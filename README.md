@@ -4,7 +4,7 @@
 
 ```sh
 git clone <repo url>
-cd crawlhub
+cd OData_Assignment
 npm i
 ```
 
