@@ -43,37 +43,66 @@ var readLine = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-readLine.question("Welcome to ODATA !\n \nbelow are the options:\n1.List people \n\n2.Searching/Show details on a specific Person \n\n3.Filtering people \n\n4. 0 To Exit\n", function (answer) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, _b, _c, _d, name_1, _e, _f, _g;
-    return __generator(this, function (_h) {
-        switch (_h.label) {
+function Filter(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        var Username, FirstName;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!(options == 1)) return [3 /*break*/, 2];
+                    Username = readlineSync.question('\n Enter Username:');
+                    return [4 /*yield*/, UserController.getUserList(null, { Username: Username })];
+                case 1: return [2 /*return*/, _a.sent()];
+                case 2:
+                    if (!(options == 2)) return [3 /*break*/, 4];
+                    FirstName = readlineSync.question('\n Enter FirstName:');
+                    return [4 /*yield*/, UserController.getUserList(null, { FirstName: FirstName })];
+                case 3: return [2 /*return*/, _a.sent()];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+readLine.question("Welcome to ODATA !\n \nbelow are the options:\n1.List people \n\n2.Searching/Show details on a specific Person \n\n3.Filtering people \n\n", function (answer) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, _b, _c, _d, name_1, _e, _f, _g, options, _h, _j, _k;
+    return __generator(this, function (_l) {
+        switch (_l.label) {
             case 0:
                 console.log(answer);
                 _a = answer;
                 switch (_a) {
                     case '1': return [3 /*break*/, 1];
                     case '2': return [3 /*break*/, 3];
+                    case '3': return [3 /*break*/, 5];
                 }
-                return [3 /*break*/, 5];
+                return [3 /*break*/, 7];
             case 1:
                 _c = (_b = console).log;
                 _d = ['Listing people from ODATA ! \n'];
-                return [4 /*yield*/, UserController.getUserList(null)];
+                return [4 /*yield*/, UserController.getUserList(null, null)];
             case 2:
-                _c.apply(_b, _d.concat([_h.sent()]));
-                return [3 /*break*/, 6];
+                _c.apply(_b, _d.concat([_l.sent()]));
+                return [3 /*break*/, 8];
             case 3:
-                name_1 = readlineSync.question('Enter Name to be search? ');
+                name_1 = readlineSync.question('Enter Name to be search? \n');
                 _f = (_e = console).log;
                 _g = ['User Info ! \n'];
-                return [4 /*yield*/, UserController.getUserList(name_1)];
+                return [4 /*yield*/, UserController.getUserList(name_1, null)];
             case 4:
-                _f.apply(_e, _g.concat([_h.sent()]));
-                return [3 /*break*/, 6];
+                _f.apply(_e, _g.concat([_l.sent()]));
+                return [3 /*break*/, 8];
             case 5:
-                console.log('Invalid answer!');
-                _h.label = 6;
+                options = readlineSync.question('Which Filter you want to use ? Enter Option Number\n 1. Filter By Username \n2. By FirstName :');
+                _j = (_h = console).log;
+                _k = ['Filter Result:'];
+                return [4 /*yield*/, Filter(options)];
             case 6:
+                _j.apply(_h, _k.concat([_l.sent()]));
+                return [3 /*break*/, 8];
+            case 7:
+                console.log('Invalid answer!');
+                _l.label = 8;
+            case 8:
                 readLine.close();
                 return [2 /*return*/];
         }

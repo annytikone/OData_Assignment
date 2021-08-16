@@ -37,17 +37,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.getUserList = void 0;
-/* eslint-disable import/prefer-default-export */
-// eslint-disable-next-line no-multiple-empty-lines
 var UserService = require("../service/user.service");
-var getUserList = function (search) { return __awaiter(void 0, void 0, void 0, function () {
+var getUserList = function (search, filter) { return __awaiter(void 0, void 0, void 0, function () {
     var err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                console.log('controller call');
-                return [4 /*yield*/, UserService.getUserList(search)];
+                return [4 /*yield*/, UserService.getUserList(search, filter)];
             case 1: return [2 /*return*/, _a.sent()];
             case 2:
                 err_1 = _a.sent();

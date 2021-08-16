@@ -4,7 +4,7 @@
 
 ```sh
 git clone <repo url>
-cd OData_Assignment
+cd OData_Assignment/src
 npm i
 ```
 

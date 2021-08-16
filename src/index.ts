@@ -8,19 +8,14 @@ const readLine = readline.createInterface({
   output: process.stdout,
 });
 
-async function Filter( options:number) {
-  const Filter = {};
-
+async function Filter(options: number) {
   if (options == 1) {
-    const Username = readlineSync.question('Enter Username:');
-    Filter.username = Username;
-    return UserController.getUserList(null,Filter));
-  }
-  else if(options == 2){
-    const FirstName = readlineSync.question('Enter FirstName:');
-    Filter.firstName = FirstName;
-    return UserController.getUserList(null,Filter));
+    const Username = readlineSync.question('\n Enter Username:');
 
+    return await UserController.getUserList(null, { Username });
+  } else if (options == 2) {
+    const FirstName = readlineSync.question('\n Enter FirstName:');
+    return await UserController.getUserList(null, { FirstName });
   }
 }
 
@@ -30,20 +25,18 @@ below are the options:
 1.List people \n
 2.Searching/Show details on a specific Person \n
 3.Filtering people \n
-4. 0 To Exit
 `,
   async (answer) => {
-    console.log(answer);
     switch (answer) {
       case '1':
         console.log(
           'Listing people from ODATA ! \n',
-          await UserController.getUserList(null)
+          await UserController.getUserList(null, null)
         );
         break;
 
       case '2':
-        const name = readlineSync.question('Enter Name to be search? ');
+        const name = readlineSync.question('Enter Name to be search? \n');
         console.log(
           'User Info ! \n',
           await UserController.getUserList(name, null)
@@ -52,9 +45,9 @@ below are the options:
 
       case '3':
         const options = readlineSync.question(
-          'Which Filter you want to use ? Enter Option Number\n 1. Filter By Username 2. By FirstName '
+          'Which Filter you want to use ? Enter Option Number\n 1. Filter By Username \n2. By FirstName :'
         );
-
+        console.log('Filter Result:', await Filter(options));
         break;
       default:
         console.log('Invalid answer!');

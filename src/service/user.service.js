@@ -36,24 +36,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getInfo = exports.getUserList = void 0;
-/* eslint-disable import/prefer-default-export */
-// eslint-disable-next-line no-multiple-empty-lines
+exports.getUserList = void 0;
 var node_fetch_1 = require("node-fetch");
 var config_1 = require("../config/config");
 var baseUrl = config_1["default"].ODATAURL;
-var getUserList = function (search) { return __awaiter(void 0, void 0, void 0, function () {
+var getUserList = function (search, filter) { return __awaiter(void 0, void 0, void 0, function () {
     var url, result, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = baseUrl;
+                console.log('filter:', filter);
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                console.log('inside service');
                 if (search) {
                     url = baseUrl + "('" + search + "')";
+                }
+                if (filter && filter.Username) {
+                    url = baseUrl + "?$filter=contains(Username, '" + filter.Username + "')";
+                }
+                if (filter && filter.FirstName) {
+                    url = baseUrl + "?$filter=contains(FirstName, '" + filter.FirstName + "')";
                 }
                 return [4 /*yield*/, node_fetch_1["default"](url)];
             case 2:
@@ -68,26 +72,3 @@ var getUserList = function (search) { return __awaiter(void 0, void 0, void 0, f
     });
 }); };
 exports.getUserList = getUserList;
-var getInfo = function (search, filter) { return __awaiter(void 0, void 0, void 0, function () {
-    var url, result, err_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                url = baseUrl;
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                console.log('inside service');
-                return [4 /*yield*/, node_fetch_1["default"](url)];
-            case 2:
-                result = _a.sent();
-                return [2 /*return*/, result.json()];
-            case 3:
-                err_2 = _a.sent();
-                console.log('something went wrong:', err_2);
-                return [2 /*return*/, err_2];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getInfo = getInfo;
