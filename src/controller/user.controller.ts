@@ -2,10 +2,10 @@
 // eslint-disable-next-line no-multiple-empty-lines
 import * as UserService from '../service/user.service';
 
-export const getUserList = async (search) => {
+export const getUserList = async (search, filter) => {
   try {
     console.log('controller call');
-    return await UserService.getUserList(search);
+    return await UserService.getUserList(search, filter);
   } catch (err) {
     return err;
   }

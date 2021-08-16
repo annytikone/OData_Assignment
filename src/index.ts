@@ -8,6 +8,22 @@ const readLine = readline.createInterface({
   output: process.stdout,
 });
 
+async function Filter( options:number) {
+  const Filter = {};
+
+  if (options == 1) {
+    const Username = readlineSync.question('Enter Username:');
+    Filter.username = Username;
+    return UserController.getUserList(null,Filter));
+  }
+  else if(options == 2){
+    const FirstName = readlineSync.question('Enter FirstName:');
+    Filter.firstName = FirstName;
+    return UserController.getUserList(null,Filter));
+
+  }
+}
+
 readLine.question(
   `Welcome to ODATA !\n 
 below are the options:
@@ -28,14 +44,17 @@ below are the options:
 
       case '2':
         const name = readlineSync.question('Enter Name to be search? ');
-        console.log('User Info ! \n', await UserController.getUserList(name));
+        console.log(
+          'User Info ! \n',
+          await UserController.getUserList(name, null)
+        );
         break;
 
       case '3':
-        const username = readlineSync.question(
+        const options = readlineSync.question(
           'Which Filter you want to use ? Enter Option Number\n 1. Filter By Username 2. By FirstName '
         );
-        console.log('User Info ! \n', await UserController.getUserList(name));
+
         break;
       default:
         console.log('Invalid answer!');
